@@ -288,7 +288,10 @@
       });
     }
 
+  
+// Reshuffle the gallery every 5 minutes
     renderGallery();
+setInterval(renderGallery, 5 * 60 * 1000);
   </script>
 
 </body>
