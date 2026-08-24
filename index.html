@@ -208,44 +208,50 @@
 
 /* Disguise mode */
 
+/* Disguise mode */
+
 body.disguise-mode .card-title,
 body.disguise-mode .card-tag {
   filter: blur(12px);
   user-select: none;
 }
 
-body.disguise-mode .card-content {
-  opacity: 0.8;
+/* Blur all imagery */
+body.disguise-mode .card-image {
+  filter: blur(18px);
+  transform: scale(1.08);
 }
 
+/* Blur the text overlay as well */
 body.disguise-mode .image-card .card-content {
   filter: blur(12px);
 }
 
-body.disguise-mode #page-title::after {
-  content: "Daily Inspiration";
+/* Keep the card itself crisp so the page still looks normal */
+body.disguise-mode .card {
+  overflow: hidden;
 }
 
-body.disguise-mode #page-subtitle::after {
-  content: "A collection of thoughts.";
-}
-
+/* Replace the page heading */
 body.disguise-mode #page-title,
 body.disguise-mode #page-subtitle {
   font-size: 0;
 }
 
 body.disguise-mode #page-title::after {
+  content: "Daily Inspiration";
   font-size: clamp(32px, 5vw, 58px);
   font-weight: 600;
   letter-spacing: -0.04em;
 }
 
 body.disguise-mode #page-subtitle::after {
+  content: "A collection of thoughts.";
   font-size: 14px;
   opacity: 0.55;
 }
 
+/* Make the disguise button very subtle */
 body.disguise-mode .disguise-toggle {
   opacity: 0.15;
 }
