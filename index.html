@@ -371,8 +371,30 @@
     <div class="footer"> Everything is working out in my favour. </div>
     <script>
       let manifestations = [];
-		const pageFlipSound = new Audio("sounds/page-flip.mp3");
-	pageFlipSound.volume = 0.35;
+
+const pageFlipSound = new Audio("sounds/page-flip.mp3");
+pageFlipSound.volume = 0.35;
+
+const audioModal = document.getElementById("audio-modal");
+const enterGallery = document.getElementById("enter-gallery");
+
+let audioUnlocked = false;
+
+enterGallery.addEventListener("click", async () => {
+  try {
+    await pageFlipSound.play();
+
+    pageFlipSound.pause();
+    pageFlipSound.currentTime = 0;
+
+    audioUnlocked = true;
+
+    audioModal.classList.add("hidden");
+
+  } catch (error) {
+    console.error("Could not unlock audio:", error);
+  }
+});
 
       function shuffle(array) {
         const shuffled = [...array];
