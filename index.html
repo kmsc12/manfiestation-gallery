@@ -19,7 +19,7 @@
 
       header {
         padding: 42px 5vw 28px;
-        text-align: centre;
+        text-align: center;
       }
 
       .eyebrow {
@@ -74,11 +74,39 @@
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
       }
 
+      .image-wrapper {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #e9e5df;
+      }
+
       .card-image {
+        display: block;
+      }
+
+      /* Same image, enlarged and Gaussian-blurred to fill the card background. */
+      .card-image-blur {
+        position: absolute;
+        inset: -30px;
+        width: calc(100% + 60px);
+        height: calc(100% + 60px);
+        object-fit: cover;
+        filter: blur(25px);
+        opacity: 0.85;
+        z-index: 1;
+      }
+
+      /* Sharp version: the entire image stays visible without cropping. */
+      .card-image-sharp {
+        position: relative;
         width: 100%;
         height: 100%;
-        display: block;
-        object-fit: cover;
+        object-fit: contain;
+        z-index: 2;
       }
 
       .image-card {
@@ -181,96 +209,86 @@
           font-size: 20px;
         }
       }
-		.disguise-toggle {
-  position: fixed;
-  top: 18px;
-  right: 20px;
 
-  width: 30px;
-  height: 30px;
+      .disguise-toggle {
+        position: fixed;
+        top: 18px;
+        right: 20px;
+        width: 30px;
+        height: 30px;
+        border: none;
+        background: transparent;
+        font-size: 14px;
+        letter-spacing: 2px;
+        opacity: 0.25;
+        cursor: pointer;
+        z-index: 100;
+      }
 
-  border: none;
-  background: transparent;
+      .disguise-toggle:hover {
+        opacity: 0.6;
+      }
 
-  font-size: 14px;
-  letter-spacing: 2px;
+      /* Disguise mode */
+      /* Disguise mode */
+      body.disguise-mode .card-title,
+      body.disguise-mode .card-tag {
+        filter: blur(12px);
+        user-select: none;
+      }
 
-  opacity: 0.25;
+      /* Blur/hide imagery in disguise mode. */
+      body.disguise-mode .card-image-sharp {
+        visibility: hidden;
+      }
 
-  cursor: pointer;
+      body.disguise-mode .card-image-blur {
+        filter: blur(38px);
+        transform: scale(1.08);
+        opacity: 1;
+      }
 
-  z-index: 100;
-}
+      /* Blur the text overlay as well */
+      body.disguise-mode .image-card .card-content {
+        filter: blur(12px);
+      }
 
-.disguise-toggle:hover {
-  opacity: 0.6;
-}
+      /* Keep the card itself crisp so the page still looks normal */
+      body.disguise-mode .card {
+        overflow: hidden;
+      }
 
-/* Disguise mode */
+      /* Replace the page heading */
+      body.disguise-mode #page-title,
+      body.disguise-mode #page-subtitle {
+        font-size: 0;
+      }
 
-/* Disguise mode */
+      body.disguise-mode #page-title::after {
+        content: "Daily Inspiration";
+        font-size: clamp(32px, 5vw, 58px);
+        font-weight: 600;
+        letter-spacing: -0.04em;
+      }
 
-body.disguise-mode .card-title,
-body.disguise-mode .card-tag {
-  filter: blur(12px);
-  user-select: none;
-}
+      body.disguise-mode #page-subtitle::after {
+        content: "A collection of thoughts.";
+        font-size: 14px;
+        opacity: 0.55;
+      }
 
-/* Blur all imagery */
-body.disguise-mode .card-image {
-  filter: blur(18px);
-  transform: scale(1.08);
-}
-
-/* Blur the text overlay as well */
-body.disguise-mode .image-card .card-content {
-  filter: blur(12px);
-}
-
-/* Keep the card itself crisp so the page still looks normal */
-body.disguise-mode .card {
-  overflow: hidden;
-}
-
-/* Replace the page heading */
-body.disguise-mode #page-title,
-body.disguise-mode #page-subtitle {
-  font-size: 0;
-}
-
-body.disguise-mode #page-title::after {
-  content: "Daily Inspiration";
-  font-size: clamp(32px, 5vw, 58px);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-}
-
-body.disguise-mode #page-subtitle::after {
-  content: "A collection of thoughts.";
-  font-size: 14px;
-  opacity: 0.55;
-}
-
-/* Make the disguise button very subtle */
-body.disguise-mode .disguise-toggle {
-  opacity: 0.15;
-}
+      /* Make the disguise button very subtle */
+      body.disguise-mode .disguise-toggle {
+        opacity: 0.15;
+      }
     </style>
   </head>
   <body>
     <header>
       <div class="eyebrow">My reality</div>
       <h1 id="page-title">Manifestation Gallery</h1>
-<div class="subtitle" id="page-subtitle">What I already have.</div>
-
-<button
-  class="disguise-toggle"
-  id="disguise-toggle"
-  aria-label="Toggle disguise mode"
-  title="Toggle disguise mode"
->
-  •••
-</button>
+      <div class="subtitle" id="page-subtitle">What I already have.</div>
+      <button class="disguise-toggle" id="disguise-toggle" aria-label="Toggle disguise mode" title="Toggle disguise mode"> ••• </button>
     </header>
     <main class="gallery" id="gallery"></main>
     <div class="footer"> Everything is working out in my favour. </div>
@@ -298,53 +316,229 @@ body.disguise-mode .disguise-toggle {
         card.className = image ? "card image-card" : "card text-card";
         if (image) {
           card.innerHTML = `
-        
-					
-					<img
-          class="card-image"
-          src="${escapeHTML(image)}"
-          alt=""
-        >
-						<div class="card-content">
-							<div class="card-title">
-            ${escapeHTML(item.title)}
-          </div>
 
-          ${
-            item.tag
-              ? `
-							
-							<div class="card-tag">
-                   ${escapeHTML(item.tag)}
-                 </div>`
-              : ""
-          }
-        
-						
-						</div>
-      `;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					<div class="image-wrapper">
+						<img
+    class="card-image card-image-blur"
+    src="${escapeHTML(image)}"
+    alt=""
+    aria-hidden="true"
+  >
+							<img
+    class="card-image card-image-sharp"
+    src="${escapeHTML(image)}"
+    alt=""
+  >
+							</div>
+							<div class="card-content">
+								<div class="card-title">
+
+
+
+${escapeHTML(item.title)}
+
+
+
+</div>
+
+
+
+
+
+${
+
+
+
+item.tag
+
+
+
+? `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								<div class="card-tag">
+
+
+
+${escapeHTML(item.tag)}
+
+
+
+</div>`
+
+
+
+: ""
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							</div>
+
+
+
+`;
         } else {
           card.innerHTML = `
-        
-						
-						<div class="card-content">
-							<div class="card-title">
-            ${escapeHTML(item.title)}
-          </div>
 
-          ${
-            item.tag
-              ? `
-							
-							<div class="card-tag">
-                   ${escapeHTML(item.tag)}
-                 </div>`
-              : ""
-          }
-        
-						
-						</div>
-      `;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							<div class="card-content">
+								<div class="card-title">
+
+
+
+${escapeHTML(item.title)}
+
+
+
+</div>
+
+
+
+
+
+${
+
+
+
+item.tag
+
+
+
+? `
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+								<div class="card-tag">
+
+
+
+${escapeHTML(item.tag)}
+
+
+
+</div>`
+
+
+
+: ""
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							</div>
+
+
+
+`;
         }
         return card;
       }
@@ -358,16 +552,43 @@ body.disguise-mode .disguise-toggle {
         gallery.innerHTML = "";
         if (manifestations.length === 0) {
           gallery.innerHTML = `
-      
-						
-						<div class="card text-card">
-							<div class="card-content">
-								<div class="card-title">
-            No manifestations found.
-          </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							<div class="card text-card">
+								<div class="card-content">
+									<div class="card-title">
+
+
+
+No manifestations found.
+
+
+
+</div>
+								</div>
 							</div>
-						</div>
-    `;
+
+
+
+`;
           return;
         }
         // Randomly select up to 10 manifestations.
@@ -386,11 +607,27 @@ body.disguise-mode .disguise-toggle {
           }
           const data = await response.json();
           /*
-            manifestations.json has this structure:
 
-            {
-              "manifestations": [...]
-            }
+
+
+          manifestations.json has this structure:
+
+
+
+
+
+          {
+
+
+
+          "manifestations": [...]
+
+
+
+          }
+
+
+
           */
           if (!data || !Array.isArray(data.manifestations)) {
             throw new Error("manifestations.json does not contain a manifestations array.");
@@ -401,91 +638,84 @@ body.disguise-mode .disguise-toggle {
         } catch (error) {
           console.error(error);
           document.getElementById("gallery").innerHTML = `
-        
-						
-						<div class="card text-card">
-							<div class="card-content">
-								<div class="card-title">
-              Couldn't load the manifestations.
-            </div>
-								<div class="card-tag">
-              Check the browser console
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+							<div class="card text-card">
+								<div class="card-content">
+									<div class="card-title">
+
+
+
+Couldn't load the manifestations.
+
+
+
+</div>
+									<div class="card-tag">
+
+
+
+Check the browser console
+
+
+
+</div>
+								</div>
 							</div>
-						</div>
-      `;
+
+
+
+`;
         }
       }
       // Load the actual Notion data.
       loadManifestations();
       // Reshuffle every 5 minutes.
       setInterval(renderGallery, 5 * 60 * 1000);
-    const disguiseToggle =
-  document.getElementById("disguise-toggle");
+      const disguiseToggle = document.getElementById("disguise-toggle");
+      const pageTitle = document.getElementById("page-title");
+      const pageSubtitle = document.getElementById("page-subtitle");
 
-const pageTitle =
-  document.getElementById("page-title");
+      function setDisguiseMode(enabled) {
+        document.body.classList.toggle("disguise-mode", enabled);
+        localStorage.setItem("disguiseMode", enabled ? "true" : "false");
+      }
 
-const pageSubtitle =
-  document.getElementById("page-subtitle");
-
-
-function setDisguiseMode(enabled) {
-
-  document.body.classList.toggle(
-    "disguise-mode",
-    enabled
-  );
-
-  localStorage.setItem(
-    "disguiseMode",
-    enabled ? "true" : "false"
-  );
-}
-
-
-function toggleDisguiseMode() {
-
-  const enabled =
-    !document.body.classList.contains(
-      "disguise-mode"
-    );
-
-  setDisguiseMode(enabled);
-}
-
-
-disguiseToggle.addEventListener(
-  "click",
-  toggleDisguiseMode
-);
-
-
-// Press D to toggle disguise mode.
-// Ignore the shortcut when typing into an input.
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if (
-      event.key.toLowerCase() === "d" &&
-      !["INPUT", "TEXTAREA"].includes(
-        document.activeElement.tagName
-      )
-    ) {
-      toggleDisguiseMode();
-    }
-  }
-);
-
-
-// Remember the last mode used.
-const savedDisguiseMode =
-  localStorage.getItem("disguiseMode");
-
-if (savedDisguiseMode === "true") {
-  setDisguiseMode(true);
-}
-	</script>
+      function toggleDisguiseMode() {
+        const enabled = !document.body.classList.contains("disguise-mode");
+        setDisguiseMode(enabled);
+      }
+      disguiseToggle.addEventListener("click", toggleDisguiseMode);
+      // Press D to toggle disguise mode.
+      // Ignore the shortcut when typing into an input.
+      document.addEventListener("keydown", event => {
+        if (event.key.toLowerCase() === "d" && !["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+          toggleDisguiseMode();
+        }
+      });
+      // Remember the last mode used.
+      const savedDisguiseMode = localStorage.getItem("disguiseMode");
+      if (savedDisguiseMode === "true") {
+        setDisguiseMode(true);
+      }
+    </script>
   </body>
 </html>
