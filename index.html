@@ -5,6 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manifestation Gallery</title>
     <style>
+		.audio-modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  backdrop-filter: blur(8px);
+}
+
+.audio-modal-box {
+  width: min(360px, 85vw);
+
+  padding: 32px;
+
+  border-radius: 20px;
+
+  background: white;
+
+  text-align: center;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.audio-modal-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.audio-modal-text {
+  font-size: 14px;
+  opacity: 0.55;
+  margin-bottom: 24px;
+}
+
+#enter-gallery {
+  border: none;
+
+  padding: 11px 20px;
+
+  border-radius: 999px;
+
+  background: #111;
+  color: white;
+
+  font-size: 13px;
+
+  cursor: pointer;
+}
+
+#enter-gallery:hover {
+  opacity: 0.8;
+}
+
+.audio-modal.hidden {
+  display: none;
+}
       * {
         box-sizing: border-box;
       }
@@ -286,6 +349,18 @@
     </style>
   </head>
   <body>
+	  <div class="audio-modal" id="audio-modal">
+  <div class="audio-modal-box">
+    <div class="audio-modal-title">Ready?</div>
+    <div class="audio-modal-text">
+      Your gallery is waiting.
+    </div>
+
+    <button id="enter-gallery">
+      Enter Gallery
+    </button>
+  </div>
+</div>
     <header>
       <div class="eyebrow">My reality</div>
       <h1 id="page-title">Manifestation Gallery</h1>
