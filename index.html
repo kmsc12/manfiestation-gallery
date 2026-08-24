@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manifestation Gallery</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f7f5f2;
+      color: #242321;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+                   Helvetica, Arial, sans-serif;
+    }
+
+    header {
+      padding: 42px 5vw 28px;
+      text-align: centre;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(32px, 5vw, 58px);
+      font-weight: 600;
+      letter-spacing: -0.04em;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 14px;
+      opacity: 0.55;
+    }
+
+    .gallery {
+      width: min(1500px, 92vw);
+      margin: 20px auto 60px;
+
+      columns: 4 240px;
+      column-gap: 18px;
+    }
+
+    .card {
+      break-inside: avoid;
+      margin-bottom: 18px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      min-height: 180px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      background: #e9e5df;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.10);
+    }
+
+    .card-image {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-title {
+      font-size: 22px;
+      line-height: 1.12;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .card-tag {
+      margin-top: 15px;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      opacity: 0.55;
+    }
+
+    .text-card {
+      min-height: 240px;
+    }
+
+    .text-card:nth-child(3n) {
+      min-height: 310px;
+    }
+
+    .text-card:nth-child(5n) {
+      min-height: 200px;
+    }
+
+    .text-card:nth-child(7n) {
+      min-height: 360px;
+    }
+
+    .text-card .card-title {
+      font-size: clamp(23px, 2vw, 31px);
+    }
+
+    .footer {
+      text-align: center;
+      padding: 20px 20px 50px;
+      font-size: 11px;
+      opacity: 0.35;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .gallery {
+        columns: 3 200px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding-top: 30px;
+      }
+
+      .gallery {
+        columns: 2 150px;
+        width: 94vw;
+        gap: 10px;
+      }
+
+      .card {
+        margin-bottom: 10px;
+        border-radius: 13px;
+      }
+
+      .card-content {
+        padding: 16px;
+      }
+
+      .card-title {
+        font-size: 17px;
+      }
+
+      .text-card .card-title {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="eyebrow">My reality</div>
+    <h1>Manifestation Gallery</h1>
+    <div class="subtitle">What I already have.</div>
+  </header>
+
+  <main class="gallery" id="gallery"></main>
+
+  <div class="footer">
+    Everything is working out in my favour.
+  </div>
+
+  <script>
+    /*
+      TEMPORARY TEST DATA
+
+      This will eventually be replaced automatically
+      with your Notion database.
+    */
+
+    const manifestations = [
+      {
+        title: "Heavy Serenade is #1 on all the charts",
+        tag: "KPop"
+      },
+      {
+        title: "I have my dream job.",
+        tag: "Career"
+      },
+      {
+        title: "My knee is strong, healthy and completely capable.",
+        tag: "Health"
+      },
+      {
+        title: "I run effortlessly.",
+        tag: "Health"
+      },
+      {
+        title: "I play basketball and ultimate frisbee with ease.",
+        tag: "Sport"
+      },
+      {
+        title: "Everything always works out in my favour.",
+        tag: "Life"
+      },
+      {
+        title: "I always have more than enough money.",
+        tag: "Money"
+      },
+      {
+        title: "My life is exactly what I want it to be.",
+        tag: "Life"
+      },
+      {
+        title: "I wake up excited about my life.",
+        tag: "Life"
+      },
+      {
+        title: "Everything I want comes to me naturally.",
+        tag: "Manifestation"
+      }
+    ];
+
+    /*
+      Fisher-Yates shuffle
+      Randomises the manifestations every time
+      the page loads.
+    */
+
+    function shuffle(array) {
+      const shuffled = [...array];
+
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [shuffled[i], shuffled[j]] =
+          [shuffled[j], shuffled[i]];
+      }
+
+      return shuffled;
+    }
+
+    function createCard(item) {
+      const card = document.createElement("article");
+
+      card.className = "card text-card";
+
+      card.innerHTML = `
+        <div class="card-content">
+          <div class="card-title">
+            ${escapeHTML(item.title)}
+          </div>
+
+          ${item.tag ? `
+            <div class="card-tag">
+              ${escapeHTML(item.tag)}
+            </div>
+          ` : ""}
+        </div>
+      `;
+
+      return card;
+    }
+
+    function escapeHTML(text) {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function renderGallery() {
+      const gallery = document.getElementById("gallery");
+
+      gallery.innerHTML = "";
+
+      shuffle(manifestations).forEach(item => {
+        gallery.appendChild(createCard(item));
+      });
+    }
+
+    renderGallery();
+  </script>
+
+</body>
+</html>
