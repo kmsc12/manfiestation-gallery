@@ -262,32 +262,35 @@
   }
 
   function renderGallery() {
-    const gallery = document.getElementById("gallery");
+  const gallery = document.getElementById("gallery");
 
-    if (!gallery) {
-      console.error("Gallery element not found.");
-      return;
-    }
+  if (!gallery) {
+    console.error("Gallery element not found.");
+    return;
+  }
 
-    gallery.innerHTML = "";
+  gallery.innerHTML = "";
 
-    if (manifestations.length === 0) {
-      gallery.innerHTML = `
-        <div class="card text-card">
-          <div class="card-content">
-            <div class="card-title">
-              No manifestations found.
-            </div>
+  if (manifestations.length === 0) {
+    gallery.innerHTML = `
+      <div class="card text-card">
+        <div class="card-content">
+          <div class="card-title">
+            No manifestations found.
           </div>
         </div>
-      `;
-      return;
-    }
-
-    shuffle(manifestations).forEach(item => {
-      gallery.appendChild(createCard(item));
-    });
+      </div>
+    `;
+    return;
   }
+
+  // Randomly select up to 10 manifestations.
+  const selected = shuffle(manifestations).slice(0, 10);
+
+  selected.forEach(item => {
+    gallery.appendChild(createCard(item));
+  });
+}
 
   async function loadManifestations() {
     try {
