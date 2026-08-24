@@ -374,6 +374,8 @@
 
 const pageFlipSound = new Audio("sounds/page-flip.mp3");
 pageFlipSound.volume = 0.35;
+pageFlipSound.preload = "auto";
+pageFlipSound.load();
 
 const audioModal = document.getElementById("audio-modal");
 const enterGallery = document.getElementById("enter-gallery");
@@ -694,13 +696,16 @@ No manifestations found.
         }
         // Randomly select up to 10 manifestations.
         const selected = shuffle(manifestations).slice(0, 10);
-        selected.forEach(item => {
-          gallery.appendChild(createCard(item));
-        });
 
-		  if (audioUnlocked) {
-  pageFlipSound.currentTime = 0;
-  pageFlipSound.play().catch(() => {});
+selected.forEach(item => {
+  gallery.appendChild(createCard(item));
+});
+
+if (audioUnlocked) {
+  requestAnimationFrame(() => {
+    pageFlipSound.currentTime = 0;
+    pageFlipSound.play().catch(() => {});
+  });
 }
       }
       async function loadManifestations() {
