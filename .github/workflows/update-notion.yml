@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -34,8 +37,11 @@ jobs:
 
           if git diff --cached --quiet; then
             echo "No changes to save."
-          else
-            git commit -m "Update manifestations from Notion"
-            git pull --rebase origin main
-            git push
+            exit 0
           fi
+
+          git commit -m "Update manifestations from Notion"
+
+          git pull --rebase origin main
+
+          git push
