@@ -4,14 +4,13 @@ import time
 import urllib.request
 import urllib.error
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 NOTION_TOKEN = os.environ["NOTION_TOKEN"]
-
 DATA_SOURCE_ID = "a30c375a-f25a-4204-89ee-b0708d8b7913"
 
 NOTION_VERSION = "2026-03-11"
-
 API_BASE = "https://api.notion.com/v1"
 
 OUTPUT_FILE = Path("data/manifestations.json")
@@ -19,8 +18,6 @@ IMAGE_DIR = Path("images")
 
 
 def notion_request(method, endpoint, body=None):
-    """Make a request to the Notion API."""
-
     url = API_BASE + endpoint
 
     headers = {
@@ -55,13 +52,12 @@ def notion_request(method, endpoint, body=None):
 
 
 def get_all_pages():
-    """Retrieve every page from the Notion data source."""
+    """Retrieve all pages from the Notion data source."""
 
     pages = []
     cursor = None
 
     while True:
-
         body = {
             "page_size": 100
         }
@@ -89,8 +85,6 @@ def get_all_pages():
 
 
 def get_title(properties):
-    """Extract the database title."""
-
     for property_data in properties.values():
 
         if property_data.get("type") == "title":
@@ -106,8 +100,6 @@ def get_title(properties):
 
 
 def get_checkbox(properties, name):
-    """Read a checkbox property."""
-
     property_data = properties.get(name)
 
     if not property_data:
@@ -120,8 +112,6 @@ def get_checkbox(properties, name):
 
 
 def get_tag(properties):
-    """Read the Tag select property."""
-
     property_data = properties.get("Tag")
 
     if not property_data:
@@ -139,8 +129,6 @@ def get_tag(properties):
 
 
 def get_notes(properties):
-    """Read the Notes property."""
-
     property_data = properties.get("Notes")
 
     if not property_data:
@@ -158,15 +146,9 @@ def get_notes(properties):
 
 
 def get_page_images(page_id):
-    """
-    Find images inside a Notion page.
-
-    Notion-hosted image URLs expire, so we download them
-    during the GitHub Action and serve local copies.
-    """
+    """Find image blocks inside a Notion page."""
 
     images = []
-
     cursor = None
 
     while True:
@@ -183,13 +165,10 @@ def get_page_images(page_id):
 
         for block in response.get("results", []):
 
-            block_type = block.get("type")
-
-            if block_type != "image":
+            if block.get("type") != "image":
                 continue
 
             image_data = block.get("image", {})
-
             image_type = image_data.get("type")
 
             if image_type == "file":
@@ -215,8 +194,25 @@ def get_page_images(page_id):
     return images
 
 
+def get_extension(content_type):
+    """Choose a sensible image extension."""
+
+    content_type = (content_type or "").lower()
+
+    extensions = {
+        "image/jpeg": ".jpg",
+        "image/jpg": ".jpg",
+        "image/png": ".png",
+        "image/gif": ".gif",
+        "image/webp": ".webp",
+        "image/svg+xml": ".svg",
+    }
+
+    return extensions.get(content_type, ".jpg")
+
+
 def download_image(url, filename):
-    """Download a Notion image into the repository."""
+    """Download an image and return its local path."""
 
     destination = IMAGE_DIR / filename
 
@@ -231,10 +227,17 @@ def download_image(url, filename):
 
         with urllib.request.urlopen(request) as response:
 
+            content_type = response.headers.get("Content-Type")
+            extension = get_extension(content_type)
+
+            destination = IMAGE_DIR / (
+                Path(filename).stem + extension
+            )
+
             with open(destination, "wb") as file:
                 file.write(response.read())
 
-        return str(destination)
+        return str(destination).replace("\\", "/")
 
     except Exception as error:
 
@@ -243,38 +246,113 @@ def download_image(url, filename):
         return None
 
 
+def remove_page_images(page_id):
+    """Remove locally cached images belonging to a page."""
+
+    prefix = page_id.replace("-", "")
+
+    for file in IMAGE_DIR.glob(f"{prefix}-*"):
+        try:
+            file.unlink()
+            print(f"Removed old image: {file}")
+        except Exception as error:
+            print(f"Could not remove {file}: {error}")
+
+
+def load_existing_data():
+    """Load the previous gallery data."""
+
+    if not OUTPUT_FILE.exists():
+        return {}
+
+    try:
+        with open(
+            OUTPUT_FILE,
+            "r",
+            encoding="utf-8"
+        ) as file:
+
+            data = json.load(file)
+
+        return {
+            item["id"]: item
+            for item in data.get("manifestations", [])
+        }
+
+    except Exception:
+        return {}
+
+
 def main():
 
     print("Connecting to Notion...")
+
+    IMAGE_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    OUTPUT_FILE.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
+    existing = load_existing_data()
 
     pages = get_all_pages()
 
     print(f"Found {len(pages)} Notion pages.")
 
-    IMAGE_DIR.mkdir(parents=True, exist_ok=True)
-    OUTPUT_FILE.parent.mkdir(parents=True, exist_ok=True)
+    manifestations = {}
 
-    manifestations = []
+    processed = 0
+    skipped = 0
 
     for index, page in enumerate(pages):
+
+        page_id = page.get("id")
+        last_edited = page.get("last_edited_time")
 
         properties = page.get("properties", {})
 
         title = get_title(properties)
-
         done = get_checkbox(properties, "Done")
 
-        tag = get_tag(properties)
-
-        notes = get_notes(properties)
-
-        print(f"[{index + 1}/{len(pages)}] {title}")
-
-        # Do not include completed manifestations.
+        # Completed/materialised manifestations are never displayed.
         if done:
+            remove_page_images(page_id)
             continue
 
-        page_id = page.get("id")
+        previous = existing.get(page_id)
+
+        # If the page hasn't changed since the previous sync,
+        # keep the existing local version.
+        if (
+            previous
+            and previous.get("last_edited_time") == last_edited
+        ):
+
+            manifestations[page_id] = previous
+
+            skipped += 1
+
+            print(
+                f"[{index + 1}/{len(pages)}] "
+                f"Unchanged: {title}"
+            )
+
+            continue
+
+        print(
+            f"[{index + 1}/{len(pages)}] "
+            f"Changed/new: {title}"
+        )
+
+        # This page changed, so refresh its images.
+        remove_page_images(page_id)
+
+        tag = get_tag(properties)
+        notes = get_notes(properties)
 
         image_urls = get_page_images(page_id)
 
@@ -284,7 +362,7 @@ def main():
 
             filename = (
                 f"{page_id.replace('-', '')}"
-                f"-{image_index}.jpg"
+                f"-{image_index}"
             )
 
             local_path = download_image(
@@ -293,21 +371,25 @@ def main():
             )
 
             if local_path:
+                local_images.append(local_path)
 
-                local_images.append(
-                    local_path.replace("\\", "/")
-                )
-
-        manifestations.append({
+        manifestations[page_id] = {
             "id": page_id,
             "title": title,
             "tag": tag,
             "notes": notes,
             "images": local_images,
-        })
+            "last_edited_time": last_edited,
+        }
 
-        # Be polite to the Notion API.
+        processed += 1
+
+        # Keep requests comfortably below Notion's rate limit.
         time.sleep(0.35)
+
+    output = {
+        "manifestations": list(manifestations.values())
+    }
 
     with open(
         OUTPUT_FILE,
@@ -316,15 +398,18 @@ def main():
     ) as file:
 
         json.dump(
-            manifestations,
+            output,
             file,
             ensure_ascii=False,
             indent=2
         )
 
     print()
+    print(f"Changed/new pages processed: {processed}")
+    print(f"Unchanged pages reused: {skipped}")
     print(
-        f"Saved {len(manifestations)} active manifestations."
+        f"Active manifestations: "
+        f"{len(manifestations)}"
     )
 
 
