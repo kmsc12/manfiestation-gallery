@@ -1,369 +1,342 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manifestation Gallery</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #f7f5f2;
-      color: #242321;
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-                   Helvetica, Arial, sans-serif;
-    }
-
-    header {
-      padding: 42px 5vw 28px;
-      text-align: centre;
-    }
-
-    .eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      opacity: 0.5;
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(32px, 5vw, 58px);
-      font-weight: 600;
-      letter-spacing: -0.04em;
-    }
-
-    .subtitle {
-      margin-top: 10px;
-      font-size: 14px;
-      opacity: 0.55;
-    }
-
-    .gallery {
-      width: min(1500px, 92vw);
-      margin: 20px auto 60px;
-
-      columns: 4 240px;
-      column-gap: 18px;
-    }
-
-    .card {
-      break-inside: avoid;
-      margin-bottom: 18px;
-      border-radius: 18px;
-      overflow: hidden;
-      position: relative;
-      min-height: 180px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-
-      background: #e9e5df;
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.10);
-    }
-
-    .card-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-    .image-card {
-  min-height: 0;
-}
-
-    .card-content {
-      padding: 24px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .card-title {
-      font-size: 16px;
-      line-height: 1.12;
-      font-weight: 600;
-      letter-spacing: -0.025em;
-    }
-
-   .card-tag {
-  display: inline-block;
-  margin-top: 16px;
-  padding: 5px 9px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-
-    .text-card {
-      min-height: 240px;
-    }
-
-    .text-card:nth-child(3n) {
-      min-height: 310px;
-    }
-
-    .text-card:nth-child(5n) {
-      min-height: 200px;
-    }
-
-    .text-card:nth-child(7n) {
-      min-height: 360px;
-    }
-
-    .text-card .card-title {
-  font-size: clamp(23px, 2vw, 31px);
-}
-
-    .footer {
-      text-align: center;
-      padding: 20px 20px 50px;
-      font-size: 11px;
-      opacity: 0.35;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    @media (max-width: 900px) {
-      .gallery {
-        columns: 3 200px;
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manifestation Gallery</title>
+    <style>
+      * {
+        box-sizing: border-box;
       }
-    }
 
-    @media (max-width: 600px) {
+      body {
+        margin: 0;
+        background: #f7f5f2;
+        color: #242321;
+        font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+          Helvetica, Arial, sans-serif;
+      }
+
       header {
-        padding-top: 30px;
+        padding: 42px 5vw 28px;
+        text-align: centre;
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        opacity: 0.5;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(32px, 5vw, 58px);
+        font-weight: 600;
+        letter-spacing: -0.04em;
+      }
+
+      .subtitle {
+        margin-top: 10px;
+        font-size: 14px;
+        opacity: 0.55;
       }
 
       .gallery {
-        columns: 2 150px;
-        width: 94vw;
-        gap: 10px;
+        width: min(1500px, 94vw);
+        height: calc(100vh - 145px);
+        margin: 10px auto 20px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 12px;
+        overflow: hidden;
       }
 
       .card {
-        margin-bottom: 10px;
-        border-radius: 13px;
+        min-height: 0;
+        height: 100%;
+        border-radius: 14px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background: #e9e5df;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+      }
+
+      .card-image {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+      }
+
+      .image-card {
+        min-height: 0;
+      }
+
+      .image-card .card-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 14px;
+        background: linear-gradient(transparent,
+            rgba(0, 0, 0, 0.65));
+        color: white;
       }
 
       .card-content {
-        padding: 16px;
+        padding: 14px;
       }
 
       .card-title {
-  font-size: 14px;
-}
+        font-size: 15px;
+        line-height: 1.15;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .card-tag {
+        display: inline-block;
+        margin-top: 8px;
+        padding: 4px 7px;
+        border: 1px solid currentColor;
+        border-radius: 999px;
+        font-size: 8px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.6;
+      }
+
+      .text-card {
+        min-height: 0;
+      }
 
       .text-card .card-title {
-        font-size: 20px;
+        font-size: 16px;
       }
-    }
-  </style>
-</head>
 
-<body>
+      .footer {
+        display: none;
+      }
 
-  <header>
-    <div class="eyebrow">My reality</div>
-    <h1>Manifestation Gallery</h1>
-    <div class="subtitle">What I already have.</div>
-  </header>
+      @media (max-width: 900px) {
+        .gallery {
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: repeat(5, 1fr);
+          height: calc(100vh - 120px);
+          gap: 8px;
+        }
 
-  <main class="gallery" id="gallery"></main>
+        .card-title {
+          font-size: 13px;
+        }
 
-  <div class="footer">
-    Everything is working out in my favour.
-  </div>
+        .text-card .card-title {
+          font-size: 14px;
+        }
 
-  <script>
-  let manifestations = [];
+        .card-content {
+          padding: 10px;
+        }
+      }
 
-  function shuffle(array) {
-    const shuffled = [...array];
+      @media (max-width: 600px) {
+        header {
+          padding-top: 30px;
+        }
 
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
+        .gallery {
+          columns: 2 150px;
+          width: 94vw;
+          gap: 10px;
+        }
 
-      [shuffled[i], shuffled[j]] =
-        [shuffled[j], shuffled[i]];
-    }
+        .card {
+          margin-bottom: 10px;
+          border-radius: 13px;
+        }
 
-    return shuffled;
-  }
+        .card-content {
+          padding: 16px;
+        }
 
-  function escapeHTML(text) {
-    const div = document.createElement("div");
-    div.textContent = text ?? "";
-    return div.innerHTML;
-  }
+        .card-title {
+          font-size: 14px;
+        }
 
-  function createCard(item) {
-    const card = document.createElement("article");
+        .text-card .card-title {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="eyebrow">My reality</div>
+      <h1>Manifestation Gallery</h1>
+      <div class="subtitle">What I already have.</div>
+    </header>
+    <main class="gallery" id="gallery"></main>
+    <div class="footer"> Everything is working out in my favour. </div>
+    <script>
+      let manifestations = [];
 
-    const image =
-      Array.isArray(item.images) && item.images.length
-        ? item.images[0]
-        : null;
+      function shuffle(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+      }
 
-    card.className = image
-      ? "card image-card"
-      : "card text-card";
+      function escapeHTML(text) {
+        const div = document.createElement("div");
+        div.textContent = text ?? "";
+        return div.innerHTML;
+      }
 
-    if (image) {
-      card.innerHTML = `
-        <img
+      function createCard(item) {
+        const card = document.createElement("article");
+        const image = Array.isArray(item.images) && item.images.length ? item.images[0] : null;
+        card.className = image ? "card image-card" : "card text-card";
+        if (image) {
+          card.innerHTML = `
+        
+					
+					<img
           class="card-image"
           src="${escapeHTML(image)}"
           alt=""
         >
-
-        <div class="card-content">
-          <div class="card-title">
+						<div class="card-content">
+							<div class="card-title">
             ${escapeHTML(item.title)}
           </div>
 
           ${
             item.tag
-              ? `<div class="card-tag">
+              ? `
+							
+							<div class="card-tag">
                    ${escapeHTML(item.tag)}
                  </div>`
               : ""
           }
-        </div>
+        
+						
+						</div>
       `;
-    } else {
-      card.innerHTML = `
-        <div class="card-content">
-          <div class="card-title">
+        } else {
+          card.innerHTML = `
+        
+						
+						<div class="card-content">
+							<div class="card-title">
             ${escapeHTML(item.title)}
           </div>
 
           ${
             item.tag
-              ? `<div class="card-tag">
+              ? `
+							
+							<div class="card-tag">
                    ${escapeHTML(item.tag)}
                  </div>`
               : ""
           }
-        </div>
+        
+						
+						</div>
       `;
-    }
+        }
+        return card;
+      }
 
-    return card;
-  }
-
-  function renderGallery() {
-  const gallery = document.getElementById("gallery");
-
-  if (!gallery) {
-    console.error("Gallery element not found.");
-    return;
-  }
-
-  gallery.innerHTML = "";
-
-  if (manifestations.length === 0) {
-    gallery.innerHTML = `
-      <div class="card text-card">
-        <div class="card-content">
-          <div class="card-title">
+      function renderGallery() {
+        const gallery = document.getElementById("gallery");
+        if (!gallery) {
+          console.error("Gallery element not found.");
+          return;
+        }
+        gallery.innerHTML = "";
+        if (manifestations.length === 0) {
+          gallery.innerHTML = `
+      
+						
+						<div class="card text-card">
+							<div class="card-content">
+								<div class="card-title">
             No manifestations found.
           </div>
-        </div>
-      </div>
+							</div>
+						</div>
     `;
-    return;
-  }
-
-  // Randomly select up to 10 manifestations.
-  const selected = shuffle(manifestations).slice(0, 10);
-
-  selected.forEach(item => {
-    gallery.appendChild(createCard(item));
-  });
-}
-
-  async function loadManifestations() {
-    try {
-      const response = await fetch(
-        "./data/manifestations.json",
-        {
-          cache: "no-store"
+          return;
         }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Could not load manifestations.json: HTTP ${response.status}`
-        );
+        // Randomly select up to 10 manifestations.
+        const selected = shuffle(manifestations).slice(0, 10);
+        selected.forEach(item => {
+          gallery.appendChild(createCard(item));
+        });
       }
+      async function loadManifestations() {
+        try {
+          const response = await fetch("./data/manifestations.json", {
+            cache: "no-store"
+          });
+          if (!response.ok) {
+            throw new Error(`Could not load manifestations.json: HTTP ${response.status}`);
+          }
+          const data = await response.json();
+          /*
+            manifestations.json has this structure:
 
-      const data = await response.json();
-
-      /*
-        manifestations.json has this structure:
-
-        {
-          "manifestations": [...]
-        }
-      */
-
-      if (!data || !Array.isArray(data.manifestations)) {
-        throw new Error(
-          "manifestations.json does not contain a manifestations array."
-        );
-      }
-
-      manifestations = data.manifestations;
-
-      console.log(
-        `Loaded ${manifestations.length} manifestations.`
-      );
-
-      renderGallery();
-
-    } catch (error) {
-      console.error(error);
-
-      document.getElementById("gallery").innerHTML = `
-        <div class="card text-card">
-          <div class="card-content">
-            <div class="card-title">
+            {
+              "manifestations": [...]
+            }
+          */
+          if (!data || !Array.isArray(data.manifestations)) {
+            throw new Error("manifestations.json does not contain a manifestations array.");
+          }
+          manifestations = data.manifestations;
+          console.log(`Loaded ${manifestations.length} manifestations.`);
+          renderGallery();
+        } catch (error) {
+          console.error(error);
+          document.getElementById("gallery").innerHTML = `
+        
+						
+						<div class="card text-card">
+							<div class="card-content">
+								<div class="card-title">
               Couldn't load the manifestations.
             </div>
-
-            <div class="card-tag">
+								<div class="card-tag">
               Check the browser console
             </div>
-          </div>
-        </div>
+							</div>
+						</div>
       `;
-    }
-  }
-
-  // Load the actual Notion data.
-  loadManifestations();
-
-  // Reshuffle every 5 minutes.
-  setInterval(
-    renderGallery,
-    5 * 60 * 1000
-  );
-</script>
-
-</body>
+        }
+      }
+      // Load the actual Notion data.
+      loadManifestations();
+      // Reshuffle every 5 minutes.
+      setInterval(renderGallery, 5 * 60 * 1000);
+    </script>
+  </body>
 </html>
