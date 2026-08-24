@@ -1,6 +1,72 @@
 {
   "manifestations": [
     {
+      "id": "3c6909a5-a1f2-80c3-8d78-d9755d6c7cd2",
+      "title": "llama1’s dumb boss has left the company",
+      "tag": null,
+      "notes": "",
+      "images": [],
+      "last_edited_time": "2026-08-24T03:53:00.000Z"
+    },
+    {
+      "id": "3c6909a5-a1f2-8029-a174-dd3b805a1315",
+      "title": "I got a chance to try Banh Mi Chad",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c6909a5a1f28029a174dd3b805a1315-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:53:00.000Z"
+    },
+    {
+      "id": "3c6909a5-a1f2-80b3-a2d4-f7444ff76e42",
+      "title": "i got a boox palma 2 pro",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c6909a5a1f280b3a2d4f7444ff76e42-cover.webp"
+      ],
+      "last_edited_time": "2026-08-24T03:26:00.000Z"
+    },
+    {
+      "id": "3c6909a5-a1f2-80dd-bd76-dd0d31502e80",
+      "title": "i got the lilangi pc holder",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c6909a5a1f280ddbd76dd0d31502e80-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:19:00.000Z"
+    },
+    {
+      "id": "3c6909a5-a1f2-8012-8e9f-c7c90e38ddce",
+      "title": "i found my wired earpods",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c6909a5a1f280128e9fc7c90e38ddce-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:17:00.000Z"
+    },
+    {
+      "id": "3c6909a5-a1f2-80a5-b98b-f2e43cd3d38a",
+      "title": "I got a steam deck stand case",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c6909a5a1f280a5b98bf2e43cd3d38a-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:16:00.000Z"
+    },
+    {
+      "id": "3c6909a5-a1f2-80fa-aec1-ca84dba6e135",
+      "title": "lily replied to me on bubble",
+      "tag": null,
+      "notes": "",
+      "images": [],
+      "last_edited_time": "2026-08-24T03:14:00.000Z"
+    },
+    {
       "id": "3bf909a5-a1f2-80c3-b0d1-e2ea84b04e2c",
       "title": "I’m gonna be in Seoul from 2026-11-26 → 2026-11-28 for the Zero Frontier dates bc i’m nmixx’s manager of course",
       "tag": null,
@@ -13,8 +79,10 @@
       "title": "i found my right beats fit pro",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-08-17T01:18:00.000Z"
+      "images": [
+        "images/3bf909a5a1f28009a93efa3f778bfba3-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:17:00.000Z"
     },
     {
       "id": "3be909a5-a1f2-803d-9169-c23d4a922a48",
@@ -151,8 +219,10 @@
       "title": "I got the NMIXX heavy serenade windbreaker",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-05-21T03:53:00.000Z"
+      "images": [
+        "images/367909a5a1f280908809d59dd6e08932-cover.png"
+      ],
+      "last_edited_time": "2026-08-24T03:28:00.000Z"
     },
     {
       "id": "367909a5-a1f2-8028-9607-fc15cda3576e",
@@ -339,14 +409,6 @@
       "last_edited_time": "2026-04-22T03:47:00.000Z"
     },
     {
-      "id": "349909a5-a1f2-80dd-b1e5-c2d81d8c41f7",
-      "title": "llama is going to see nmixx on the 2026-05-30",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-21T11:56:00.000Z"
-    },
-    {
       "id": "349909a5-a1f2-8009-9480-caf6f0619d70",
       "title": "hybe is completely shut down",
       "tag": null,
@@ -419,14 +481,6 @@
       "last_edited_time": "2026-04-19T01:30:00.000Z"
     },
     {
-      "id": "346909a5-a1f2-803f-8a70-cd9afde78d95",
-      "title": "i got a new brand new air fryer to mum’s liking for free",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-19T01:31:00.000Z"
-    },
-    {
       "id": "346909a5-a1f2-80fd-9ab8-d3978fbf97ed",
       "title": "i got $222",
       "tag": null,
@@ -487,8 +541,10 @@
       "title": "i got a switch 2",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-16T00:55:00.000Z"
+      "images": [
+        "images/344909a5a1f280cf88d3d9c73d3ee0a2-cover.webp"
+      ],
+      "last_edited_time": "2026-08-24T03:49:00.000Z"
     },
     {
       "id": "344909a5-a1f2-803f-b5a1-cb2f43a56665",
@@ -505,14 +561,6 @@
       "notes": "",
       "images": [],
       "last_edited_time": "2026-04-15T00:16:00.000Z"
-    },
-    {
-      "id": "342909a5-a1f2-803a-8b36-cc53d6bb5b5e",
-      "title": "i got tomodachi life for free",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-14T22:23:00.000Z"
     },
     {
       "id": "342909a5-a1f2-80d2-869b-fb0f8eb83844",
@@ -568,7 +616,7 @@
       "tag": null,
       "notes": "",
       "images": [],
-      "last_edited_time": "2026-04-08T01:35:00.000Z"
+      "last_edited_time": "2026-08-24T03:28:00.000Z"
     },
     {
       "id": "339909a5-a1f2-8074-9f1e-d2cae7341d9b",
@@ -595,14 +643,6 @@
       "last_edited_time": "2026-04-04T00:14:00.000Z"
     },
     {
-      "id": "333909a5-a1f2-8091-a296-ed018e98c7a0",
-      "title": "i got coffee beans",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-03-30T05:49:00.000Z"
-    },
-    {
       "id": "333909a5-a1f2-8005-a764-c86244f27123",
       "title": "nmixx won Artist of the Year, Best Female Group and Song of the Year at mama awards 2026",
       "tag": null,
@@ -615,8 +655,10 @@
       "title": "i got life is strange reunion",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-03-27T08:17:00.000Z"
+      "images": [
+        "images/330909a5a1f28070aa33da3cfd04f54d-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:25:00.000Z"
     },
     {
       "id": "330909a5-a1f2-80a5-a8dd-e8abae325e75",
@@ -628,11 +670,11 @@
     },
     {
       "id": "330909a5-a1f2-800d-91f9-d77122308bc9",
-      "title": "philippines, malaysia, indonesia, latin america, australia on the zero frontier tour schedule",
+      "title": "philippines, malaysia, indonesia, latin america, australia is on the zero frontier episode one tour schedule",
       "tag": null,
       "notes": "",
       "images": [],
-      "last_edited_time": "2026-04-05T09:56:00.000Z"
+      "last_edited_time": "2026-08-24T03:14:00.000Z"
     },
     {
       "id": "32d909a5-a1f2-8016-b803-e21be434498c",
@@ -649,22 +691,6 @@
       "notes": "",
       "images": [],
       "last_edited_time": "2026-03-24T05:00:00.000Z"
-    },
-    {
-      "id": "326909a5-a1f2-8016-b656-cc491811aad6",
-      "title": "nmixx reacted to my know about me cover on buzzfeed UK",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-05T09:11:00.000Z"
-    },
-    {
-      "id": "325909a5-a1f2-80db-acaf-fe642f17186f",
-      "title": "We dropped our accountant. We don’t need one anymore and we do our own taxes AKA mum never finds out that i quit my job",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-05-21T03:48:00.000Z"
     },
     {
       "id": "325909a5-a1f2-80a1-bb25-db5712b41c31",
@@ -703,16 +729,20 @@
       "title": "i got pokopia",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-03-10T00:59:00.000Z"
+      "images": [
+        "images/31f909a5a1f280d9bf3eef44c4dcb8bf-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:25:00.000Z"
     },
     {
       "id": "31f909a5-a1f2-8032-bf03-dea93b7dce59",
       "title": "i got a 1tb steam deck",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-05T09:08:00.000Z"
+      "images": [
+        "images/31f909a5a1f28032bf03dea93b7dce59-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:15:00.000Z"
     },
     {
       "id": "31e909a5-a1f2-80c7-82ae-d8b0dace13d1",
@@ -741,14 +771,6 @@
     {
       "id": "319909a5-a1f2-8085-84d0-f5e5d7ca7e6f",
       "title": "60ball/60freeball",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-05T09:57:00.000Z"
-    },
-    {
-      "id": "319909a5-a1f2-802d-a4c7-f22a679b04f1",
-      "title": "wizardrod",
       "tag": null,
       "notes": "",
       "images": [],
@@ -853,14 +875,6 @@
     {
       "id": "310909a5-a1f2-80be-8aa9-f2d3bcf39375",
       "title": "I won a milly on the lottery on 2026-02-23",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-05T09:08:00.000Z"
-    },
-    {
-      "id": "305909a5-a1f2-804e-9d83-d0b603d63c33",
-      "title": "i got mum her dream land in feb 2026",
       "tag": null,
       "notes": "",
       "images": [],
@@ -1083,14 +1097,6 @@
       "last_edited_time": "2025-12-15T06:09:00.000Z"
     },
     {
-      "id": "2ca909a5-a1f2-80f6-b029-f6d9283f1ee6",
-      "title": "my airpod max ear cups are clean",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2025-12-15T05:43:00.000Z"
-    },
-    {
       "id": "2ca909a5-a1f2-805f-ae29-d35a38c6834a",
       "title": "i have 2 milly in my bank account now",
       "tag": null,
@@ -1183,16 +1189,20 @@
       "title": "i got 2 brand new ipad pros. one for me, one for mum.",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-05T09:08:00.000Z"
+      "images": [
+        "images/2b5909a5a1f280bf87ddcf41253b99f2-cover.png"
+      ],
+      "last_edited_time": "2026-08-24T03:50:00.000Z"
     },
     {
       "id": "2b5909a5-a1f2-8016-bc52-d6f00a5cd1c3",
       "title": "i got a brand new 17 pro max in deep blue w/ 512gb",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2025-11-24T05:03:00.000Z"
+      "images": [
+        "images/2b5909a5a1f28016bc52d6f00a5cd1c3-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:12:00.000Z"
     },
     {
       "id": "2b5909a5-a1f2-80e9-b7c8-e0803bef9960",
@@ -1327,8 +1337,10 @@
       "title": "i got an rc 1 looper",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2025-10-24T12:06:00.000Z"
+      "images": [
+        "images/296909a5a1f2807ea720d7c258522c04-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:10:00.000Z"
     },
     {
       "id": "296909a5-a1f2-8054-8858-e6d008021eea",
@@ -1359,8 +1371,10 @@
       "title": "got the rode wireless pro mic",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-03-01T09:47:00.000Z"
+      "images": [
+        "images/293909a5a1f280a4ac63db4f8d122566-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:22:00.000Z"
     },
     {
       "id": "292909a5-a1f2-8099-a26e-d78cdc65d0f0",
@@ -1419,20 +1433,12 @@
       "last_edited_time": "2026-03-01T09:46:00.000Z"
     },
     {
-      "id": "288909a5-a1f2-80a1-8d7d-e79e95f89a6b",
-      "title": "NMIXX got 10+ wins for Blue Valentine",
-      "tag": null,
-      "notes": "2026-01-02 Confirmed 10th win on music bank. First music bank double crown",
-      "images": [],
-      "last_edited_time": "2026-03-01T09:46:00.000Z"
-    },
-    {
       "id": "285909a5-a1f2-8025-8bbd-faba70667a2e",
-      "title": "JOLLIBEE IN AUSTRALIA",
+      "title": "Jollibee is now in Australia",
       "tag": null,
       "notes": "",
       "images": [],
-      "last_edited_time": "2026-01-20T03:39:00.000Z"
+      "last_edited_time": "2026-08-24T03:24:00.000Z"
     },
     {
       "id": "283909a5-a1f2-807f-a2e4-c3d9c13511fc",
@@ -1492,11 +1498,11 @@
     },
     {
       "id": "26d909a5-a1f2-80f6-ba0b-e30743456ec9",
-      "title": "nmixx and rosalia collab",
+      "title": "nmixx and rosalia are collabing",
       "tag": null,
       "notes": "",
       "images": [],
-      "last_edited_time": "2026-03-12T04:36:00.000Z"
+      "last_edited_time": "2026-08-24T03:26:00.000Z"
     },
     {
       "id": "26d909a5-a1f2-801e-a97a-d04af272a20c",
@@ -1535,8 +1541,10 @@
       "title": "i got the airpods pro 3",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2025-09-20T05:28:00.000Z"
+      "images": [
+        "images/269909a5a1f2807dab97f5863c71d872-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:20:00.000Z"
     },
     {
       "id": "269909a5-a1f2-801a-a205-d9cc73c6e719",
@@ -1569,14 +1577,6 @@
       "notes": "",
       "images": [],
       "last_edited_time": "2025-09-09T05:52:00.000Z"
-    },
-    {
-      "id": "267909a5-a1f2-8080-b4af-e392416692de",
-      "title": "apple products",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2025-09-07T11:18:00.000Z"
     },
     {
       "id": "265909a5-a1f2-80ca-9169-f195379f5076",
@@ -1844,11 +1844,11 @@
     },
     {
       "id": "24f909a5-a1f2-808c-9014-c6b9b931cfae",
-      "title": "moderators for Lily’s Lost the Plot",
+      "title": "There are moderators for Lily’s Lost the Plot now",
       "tag": null,
       "notes": "",
       "images": [],
-      "last_edited_time": "2025-09-02T01:34:00.000Z"
+      "last_edited_time": "2026-08-24T03:12:00.000Z"
     },
     {
       "id": "24f909a5-a1f2-8030-880e-cc3d93885221",
@@ -2011,8 +2011,10 @@
       "title": "i have a guitar rack",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2025-09-02T01:06:00.000Z"
+      "images": [
+        "images/247909a5a1f2808c8be6d51241e1abf2-cover.webp"
+      ],
+      "last_edited_time": "2026-08-24T03:16:00.000Z"
     },
     {
       "id": "247909a5-a1f2-8040-a732-d794139c0ddb",
@@ -2365,14 +2367,6 @@
       "notes": "",
       "images": [],
       "last_edited_time": "2025-10-16T09:35:00.000Z"
-    },
-    {
-      "id": "239909a5-a1f2-8071-b75e-dcb9ebfb4b78",
-      "title": "nmixx’s october 2025 comeback consists of unit songs",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2025-09-02T01:06:00.000Z"
     },
     {
       "id": "239909a5-a1f2-8059-983d-f74629f5fd21",
@@ -2869,8 +2863,10 @@
       "title": "i received a brand new lava me 4",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2025-09-03T01:40:00.000Z"
+      "images": [
+        "images/1ea909a5a1f280e5b929c6714a63cbd9-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-24T03:48:00.000Z"
     },
     {
       "id": "1e9909a5-a1f2-808e-a38d-fdd580ed43f5",
@@ -2902,7 +2898,7 @@
       "tag": null,
       "notes": "",
       "images": [],
-      "last_edited_time": "2025-09-02T15:15:00.000Z"
+      "last_edited_time": "2026-08-24T03:19:00.000Z"
     },
     {
       "id": "1e9909a5-a1f2-8076-8c8f-d9fa00c95501",
@@ -3446,14 +3442,9 @@
       "tag": null,
       "notes": "",
       "images": [
-        "images/12d909a5a1f280309732c5ed03a7a9cc-0.webp",
-        "images/12d909a5a1f280309732c5ed03a7a9cc-1.webp",
-        "images/12d909a5a1f280309732c5ed03a7a9cc-2.webp",
-        "images/12d909a5a1f280309732c5ed03a7a9cc-3.webp",
-        "images/12d909a5a1f280309732c5ed03a7a9cc-4.webp",
-        "images/12d909a5a1f280309732c5ed03a7a9cc-5.webp"
+        "images/12d909a5a1f280309732c5ed03a7a9cc-cover.png"
       ],
-      "last_edited_time": "2025-09-02T01:05:00.000Z"
+      "last_edited_time": "2026-08-24T03:18:00.000Z"
     },
     {
       "id": "12d909a5-a1f2-8079-8239-e0df88018d87",
