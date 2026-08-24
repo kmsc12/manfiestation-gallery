@@ -3,6 +3,10 @@ name: Update Manifestation Gallery
 on:
   workflow_dispatch:
 
+  repository_dispatch:
+    types:
+      - update-manifestations
+
 permissions:
   contents: write
 
