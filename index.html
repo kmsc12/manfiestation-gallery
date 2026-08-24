@@ -181,118 +181,142 @@
   </div>
 
   <script>
-    /*
-      TEMPORARY TEST DATA
+  let manifestations = [];
 
-      This will eventually be replaced automatically
-      with your Notion database.
-    */
+  function shuffle(array) {
+    const shuffled = [...array];
 
-    const manifestations = [
-      {
-        title: "Heavy Serenade is #1 on all the charts",
-        tag: "KPop"
-      },
-      {
-        title: "I have my dream job.",
-        tag: "Career"
-      },
-      {
-        title: "My knee is strong, healthy and completely capable.",
-        tag: "Health"
-      },
-      {
-        title: "I run effortlessly.",
-        tag: "Health"
-      },
-      {
-        title: "I play basketball and ultimate frisbee with ease.",
-        tag: "Sport"
-      },
-      {
-        title: "Everything always works out in my favour.",
-        tag: "Life"
-      },
-      {
-        title: "I always have more than enough money.",
-        tag: "Money"
-      },
-      {
-        title: "My life is exactly what I want it to be.",
-        tag: "Life"
-      },
-      {
-        title: "I wake up excited about my life.",
-        tag: "Life"
-      },
-      {
-        title: "Everything I want comes to me naturally.",
-        tag: "Manifestation"
-      }
-    ];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
 
-    /*
-      Fisher-Yates shuffle
-      Randomises the manifestations every time
-      the page loads.
-    */
-
-    function shuffle(array) {
-      const shuffled = [...array];
-
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-
-        [shuffled[i], shuffled[j]] =
-          [shuffled[j], shuffled[i]];
-      }
-
-      return shuffled;
+      [shuffled[i], shuffled[j]] =
+        [shuffled[j], shuffled[i]];
     }
 
-    function createCard(item) {
-      const card = document.createElement("article");
+    return shuffled;
+  }
 
-      card.className = "card text-card";
+  function escapeHTML(text) {
+    const div = document.createElement("div");
+    div.textContent = text || "";
+    return div.innerHTML;
+  }
 
+  function createCard(item) {
+    const card = document.createElement("article");
+
+    const image =
+      item.images && item.images.length > 0
+        ? item.images[0]
+        : null;
+
+    card.className = image
+      ? "card image-card"
+      : "card text-card";
+
+    if (image) {
+      card.innerHTML = `
+        <img
+          class="card-image"
+          src="${escapeHTML(image)}"
+          alt=""
+        >
+
+        <div class="card-content">
+          <div class="card-title">
+            ${escapeHTML(item.title)}
+          </div>
+
+          ${
+            item.tag
+              ? `
+                <div class="card-tag">
+                  ${escapeHTML(item.tag)}
+                </div>
+              `
+              : ""
+          }
+        </div>
+      `;
+    } else {
       card.innerHTML = `
         <div class="card-content">
           <div class="card-title">
             ${escapeHTML(item.title)}
           </div>
 
-          ${item.tag ? `
-            <div class="card-tag">
-              ${escapeHTML(item.tag)}
-            </div>
-          ` : ""}
+          ${
+            item.tag
+              ? `
+                <div class="card-tag">
+                  ${escapeHTML(item.tag)}
+                </div>
+              `
+              : ""
+          }
         </div>
       `;
-
-      return card;
     }
 
-    function escapeHTML(text) {
-      const div = document.createElement("div");
-      div.textContent = text;
-      return div.innerHTML;
+    return card;
+  }
+
+  function renderGallery() {
+    const gallery =
+      document.getElementById("gallery");
+
+    gallery.innerHTML = "";
+
+    shuffle(manifestations).forEach(item => {
+      gallery.appendChild(createCard(item));
+    });
+  }
+
+  async function loadManifestations() {
+    try {
+      const response = await fetch(
+        "data/manifestations.json"
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `HTTP ${response.status}`
+        );
+      }
+
+      const data = await response.json();
+
+      manifestations = data.manifestations || [];
+
+      renderGallery();
+
+    } catch (error) {
+
+      console.error(
+        "Could not load manifestations:",
+        error
+      );
+
+      document.getElementById("gallery").innerHTML = `
+        <div class="card text-card">
+          <div class="card-content">
+            <div class="card-title">
+              Your manifestations are loading...
+            </div>
+          </div>
+        </div>
+      `;
     }
+  }
 
-    function renderGallery() {
-      const gallery = document.getElementById("gallery");
+  loadManifestations();
 
-      gallery.innerHTML = "";
-
-      shuffle(manifestations).forEach(item => {
-        gallery.appendChild(createCard(item));
-      });
-    }
-
-  
-// Reshuffle the gallery every 5 minutes
-    renderGallery();
-setInterval(renderGallery, 5 * 60 * 1000);
-  </script>
+  // Reshuffle every 5 minutes.
+  setInterval(
+    renderGallery,
+    5 * 60 * 1000
+  );
+</script>
 
 </body>
 </html>
