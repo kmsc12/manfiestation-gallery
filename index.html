@@ -698,9 +698,10 @@ No manifestations found.
           gallery.appendChild(createCard(item));
         });
 
-		  pageFlipSound.currentTime = 0;
-
-pageFlipSound.play().catch(() => {});
+		  if (audioUnlocked) {
+  pageFlipSound.currentTime = 0;
+  pageFlipSound.play().catch(() => {});
+}
       }
       async function loadManifestations() {
         try {
