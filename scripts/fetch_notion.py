@@ -4,7 +4,6 @@ import time
 import urllib.request
 import urllib.error
 from pathlib import Path
-from urllib.parse import urlparse
 
 
 NOTION_TOKEN = os.environ["NOTION_TOKEN"]
@@ -58,6 +57,7 @@ def get_all_pages():
     cursor = None
 
     while True:
+
         body = {
             "page_size": 100
         }
@@ -145,53 +145,27 @@ def get_notes(properties):
     ).strip()
 
 
-def get_page_images(page_id):
-    """Find image blocks inside a Notion page."""
+def get_cover_url(page):
+    """
+    Get the image URL from the Notion page cover.
 
-    images = []
-    cursor = None
+    Supports both Notion-hosted covers and external covers.
+    """
 
-    while True:
+    cover = page.get("cover")
 
-        endpoint = f"/blocks/{page_id}/children?page_size=100"
+    if not cover:
+        return None
 
-        if cursor:
-            endpoint += f"&start_cursor={cursor}"
+    cover_type = cover.get("type")
 
-        response = notion_request(
-            "GET",
-            endpoint
-        )
+    if cover_type == "file":
+        return cover.get("file", {}).get("url")
 
-        for block in response.get("results", []):
+    if cover_type == "external":
+        return cover.get("external", {}).get("url")
 
-            if block.get("type") != "image":
-                continue
-
-            image_data = block.get("image", {})
-            image_type = image_data.get("type")
-
-            if image_type == "file":
-                url = image_data.get("file", {}).get("url")
-
-            elif image_type == "external":
-                url = image_data.get("external", {}).get("url")
-
-            else:
-                url = None
-
-            if url:
-                images.append(url)
-
-        if not response.get("has_more"):
-            break
-
-        cursor = response.get("next_cursor")
-
-        if not cursor:
-            break
-
-    return images
+    return None
 
 
 def get_extension(content_type):
@@ -212,9 +186,7 @@ def get_extension(content_type):
 
 
 def download_image(url, filename):
-    """Download an image and return its local path."""
-
-    destination = IMAGE_DIR / filename
+    """Download a page cover and return its local path."""
 
     try:
 
@@ -241,22 +213,28 @@ def download_image(url, filename):
 
     except Exception as error:
 
-        print(f"Could not download image: {error}")
+        print(f"Could not download cover image: {error}")
 
         return None
 
 
 def remove_page_images(page_id):
-    """Remove locally cached images belonging to a page."""
+    """Remove cached cover images belonging to a page."""
 
     prefix = page_id.replace("-", "")
 
     for file in IMAGE_DIR.glob(f"{prefix}-*"):
+
         try:
             file.unlink()
-            print(f"Removed old image: {file}")
+
+            print(f"Removed old cover: {file}")
+
         except Exception as error:
-            print(f"Could not remove {file}: {error}")
+
+            print(
+                f"Could not remove {file}: {error}"
+            )
 
 
 def load_existing_data():
@@ -266,6 +244,7 @@ def load_existing_data():
         return {}
 
     try:
+
         with open(
             OUTPUT_FILE,
             "r",
@@ -276,10 +255,14 @@ def load_existing_data():
 
         return {
             item["id"]: item
-            for item in data.get("manifestations", [])
+            for item in data.get(
+                "manifestations",
+                []
+            )
         }
 
     except Exception:
+
         return {}
 
 
@@ -301,7 +284,9 @@ def main():
 
     pages = get_all_pages()
 
-    print(f"Found {len(pages)} Notion pages.")
+    print(
+        f"Found {len(pages)} Notion pages."
+    )
 
     manifestations = {}
 
@@ -311,25 +296,39 @@ def main():
     for index, page in enumerate(pages):
 
         page_id = page.get("id")
-        last_edited = page.get("last_edited_time")
+        last_edited = page.get(
+            "last_edited_time"
+        )
 
-        properties = page.get("properties", {})
+        properties = page.get(
+            "properties",
+            {}
+        )
 
         title = get_title(properties)
-        done = get_checkbox(properties, "Done")
 
-        # Completed/materialised manifestations are never displayed.
+        done = get_checkbox(
+            properties,
+            "Done"
+        )
+
+        # Completed/materialised manifestations
+        # are never displayed.
         if done:
+
             remove_page_images(page_id)
+
             continue
 
         previous = existing.get(page_id)
 
-        # If the page hasn't changed since the previous sync,
-        # keep the existing local version.
+        # If nothing changed, reuse the existing
+        # local data and image.
         if (
             previous
-            and previous.get("last_edited_time") == last_edited
+            and previous.get(
+                "last_edited_time"
+            ) == last_edited
         ):
 
             manifestations[page_id] = previous
@@ -348,25 +347,24 @@ def main():
             f"Changed/new: {title}"
         )
 
-        # This page changed, so refresh its images.
+        # Remove the previous cached cover.
         remove_page_images(page_id)
 
         tag = get_tag(properties)
         notes = get_notes(properties)
 
-        image_urls = get_page_images(page_id)
+        cover_url = get_cover_url(page)
 
         local_images = []
 
-        for image_index, image_url in enumerate(image_urls):
+        if cover_url:
 
             filename = (
-                f"{page_id.replace('-', '')}"
-                f"-{image_index}"
+                f"{page_id.replace('-', '')}-cover"
             )
 
             local_path = download_image(
-                image_url,
+                cover_url,
                 filename
             )
 
@@ -384,11 +382,13 @@ def main():
 
         processed += 1
 
-        # Keep requests comfortably below Notion's rate limit.
+        # Stay comfortably below Notion's API rate limit.
         time.sleep(0.35)
 
     output = {
-        "manifestations": list(manifestations.values())
+        "manifestations": list(
+            manifestations.values()
+        )
     }
 
     with open(
@@ -405,8 +405,12 @@ def main():
         )
 
     print()
-    print(f"Changed/new pages processed: {processed}")
-    print(f"Unchanged pages reused: {skipped}")
+    print(
+        f"Changed/new pages processed: {processed}"
+    )
+    print(
+        f"Unchanged pages reused: {skipped}"
+    )
     print(
         f"Active manifestations: "
         f"{len(manifestations)}"
