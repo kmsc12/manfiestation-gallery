@@ -1,6 +1,14 @@
 {
   "manifestations": [
     {
+      "id": "3c6909a5-a1f2-8063-845f-f90e04b4a631",
+      "title": "My percent rate for checked off desires is always above 90%",
+      "tag": null,
+      "notes": "",
+      "images": [],
+      "last_edited_time": "2026-08-24T06:58:00.000Z"
+    },
+    {
       "id": "3c6909a5-a1f2-8057-8121-ff7b069251de",
       "title": "I tried American barbecue in the US",
       "tag": null,
@@ -603,14 +611,6 @@
       "notes": "",
       "images": [],
       "last_edited_time": "2026-04-19T01:31:00.000Z"
-    },
-    {
-      "id": "344909a5-a1f2-8065-ab5d-df8b816142ea",
-      "title": "i have 1000 followers on the lltp twitter account",
-      "tag": null,
-      "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-16T00:56:00.000Z"
     },
     {
       "id": "344909a5-a1f2-80b2-a486-de3a5535ca21",
@@ -1564,11 +1564,11 @@
     },
     {
       "id": "26a909a5-a1f2-801a-85bd-eab63899a319",
-      "title": "nmixx song as ea sports intro",
+      "title": "An NMIXX song was used for an EA sports menu song",
       "tag": null,
       "notes": "",
       "images": [],
-      "last_edited_time": "2025-09-10T05:07:00.000Z"
+      "last_edited_time": "2026-08-24T06:49:00.000Z"
     },
     {
       "id": "269909a5-a1f2-807d-ab97-f5863c71d872",
@@ -1614,11 +1614,11 @@
     },
     {
       "id": "265909a5-a1f2-80ca-9169-f195379f5076",
-      "title": "no more strawberry legs",
+      "title": "I don’t have strawberry legs anymore",
       "tag": null,
       "notes": "",
       "images": [],
-      "last_edited_time": "2026-03-01T09:46:00.000Z"
+      "last_edited_time": "2026-08-24T06:50:00.000Z"
     },
     {
       "id": "264909a5-a1f2-80ee-bcf2-e8fd2385170c",
@@ -3683,8 +3683,10 @@
       "title": "i have veiny hands like itzy’s chaeryeong and nmixx’s jiwoo",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-03-01T09:46:00.000Z"
+      "images": [
+        "images/10e909a5a1f280fcbe15e2b1b7b7df44-cover.png"
+      ],
+      "last_edited_time": "2026-08-24T06:46:00.000Z"
     },
     {
       "id": "10d909a5-a1f2-80c4-9058-f4cda3305e68",
