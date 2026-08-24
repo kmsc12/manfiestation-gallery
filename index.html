@@ -181,13 +181,90 @@
           font-size: 20px;
         }
       }
+		.disguise-toggle {
+  position: fixed;
+  top: 18px;
+  right: 20px;
+
+  width: 30px;
+  height: 30px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 14px;
+  letter-spacing: 2px;
+
+  opacity: 0.25;
+
+  cursor: pointer;
+
+  z-index: 100;
+}
+
+.disguise-toggle:hover {
+  opacity: 0.6;
+}
+
+/* Disguise mode */
+
+body.disguise-mode .card-title,
+body.disguise-mode .card-tag {
+  filter: blur(12px);
+  user-select: none;
+}
+
+body.disguise-mode .card-content {
+  opacity: 0.8;
+}
+
+body.disguise-mode .image-card .card-content {
+  filter: blur(12px);
+}
+
+body.disguise-mode #page-title::after {
+  content: "Daily Inspiration";
+}
+
+body.disguise-mode #page-subtitle::after {
+  content: "A collection of thoughts.";
+}
+
+body.disguise-mode #page-title,
+body.disguise-mode #page-subtitle {
+  font-size: 0;
+}
+
+body.disguise-mode #page-title::after {
+  font-size: clamp(32px, 5vw, 58px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+body.disguise-mode #page-subtitle::after {
+  font-size: 14px;
+  opacity: 0.55;
+}
+
+body.disguise-mode .disguise-toggle {
+  opacity: 0.15;
+}
     </style>
   </head>
   <body>
     <header>
       <div class="eyebrow">My reality</div>
-      <h1>Manifestation Gallery</h1>
-      <div class="subtitle">What I already have.</div>
+      <h1 id="page-title">Manifestation Gallery</h1>
+<div class="subtitle" id="page-subtitle">What I already have.</div>
+
+<button
+  class="disguise-toggle"
+  id="disguise-toggle"
+  aria-label="Toggle disguise mode"
+  title="Toggle disguise mode"
+>
+  •••
+</button>
     </header>
     <main class="gallery" id="gallery"></main>
     <div class="footer"> Everything is working out in my favour. </div>
@@ -337,6 +414,72 @@
       loadManifestations();
       // Reshuffle every 5 minutes.
       setInterval(renderGallery, 5 * 60 * 1000);
-    </script>
+    const disguiseToggle =
+  document.getElementById("disguise-toggle");
+
+const pageTitle =
+  document.getElementById("page-title");
+
+const pageSubtitle =
+  document.getElementById("page-subtitle");
+
+
+function setDisguiseMode(enabled) {
+
+  document.body.classList.toggle(
+    "disguise-mode",
+    enabled
+  );
+
+  localStorage.setItem(
+    "disguiseMode",
+    enabled ? "true" : "false"
+  );
+}
+
+
+function toggleDisguiseMode() {
+
+  const enabled =
+    !document.body.classList.contains(
+      "disguise-mode"
+    );
+
+  setDisguiseMode(enabled);
+}
+
+
+disguiseToggle.addEventListener(
+  "click",
+  toggleDisguiseMode
+);
+
+
+// Press D to toggle disguise mode.
+// Ignore the shortcut when typing into an input.
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      event.key.toLowerCase() === "d" &&
+      !["INPUT", "TEXTAREA"].includes(
+        document.activeElement.tagName
+      )
+    ) {
+      toggleDisguiseMode();
+    }
+  }
+);
+
+
+// Remember the last mode used.
+const savedDisguiseMode =
+  localStorage.getItem("disguiseMode");
+
+if (savedDisguiseMode === "true") {
+  setDisguiseMode(true);
+}
+	</script>
   </body>
 </html>
