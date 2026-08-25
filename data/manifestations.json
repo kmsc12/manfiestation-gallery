@@ -1,6 +1,26 @@
 {
   "manifestations": [
     {
+      "id": "3c7909a5-a1f2-805a-98ce-dd85d8bb7e3c",
+      "title": "I got to try Birria Tacs",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c7909a5a1f2805a98cedd85d8bb7e3c-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-25T01:13:00.000Z"
+    },
+    {
+      "id": "3c7909a5-a1f2-80a6-bca2-d749d714f85d",
+      "title": "I got a Chicken and Waffle Sandwich",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c7909a5a1f280a6bca2d749d714f85d-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-25T01:11:00.000Z"
+    },
+    {
       "id": "3c7909a5-a1f2-80d9-86b8-d1772d50c85f",
       "title": "NMIXX has the highest first day sales in JYPE for 2026",
       "tag": null,
