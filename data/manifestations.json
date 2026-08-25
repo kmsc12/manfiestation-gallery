@@ -779,8 +779,10 @@
       "title": "lily and jiwoo go live together",
       "tag": null,
       "notes": "",
-      "images": [],
-      "last_edited_time": "2026-04-04T00:14:00.000Z"
+      "images": [
+        "images/337909a5a1f2809c898de985a3c2386f-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-25T16:29:00.000Z"
     },
     {
       "id": "333909a5-a1f2-8005-a764-c86244f27123",
@@ -1266,9 +1268,9 @@
       "tag": null,
       "notes": "",
       "images": [
-        "images/2b5909a5a1f280bf87ddcf41253b99f2-cover.png"
+        "images/2b5909a5a1f280bf87ddcf41253b99f2-cover.jpg"
       ],
-      "last_edited_time": "2026-08-24T03:50:00.000Z"
+      "last_edited_time": "2026-08-25T16:28:00.000Z"
     },
     {
       "id": "2b5909a5-a1f2-8016-bc52-d6f00a5cd1c3",
