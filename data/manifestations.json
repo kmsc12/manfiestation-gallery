@@ -1,6 +1,26 @@
 {
   "manifestations": [
     {
+      "id": "3c8909a5-a1f2-806b-ab78-e11018d1e02d",
+      "title": "I got the new Lego Batman game",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c8909a5a1f2806bab78e11018d1e02d-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-26T05:32:00.000Z"
+    },
+    {
+      "id": "3c8909a5-a1f2-8060-a28d-cf37de7a2614",
+      "title": "I got Lego Skylines",
+      "tag": null,
+      "notes": "",
+      "images": [
+        "images/3c8909a5a1f28060a28dcf37de7a2614-cover.jpg"
+      ],
+      "last_edited_time": "2026-08-26T05:31:00.000Z"
+    },
+    {
       "id": "3c7909a5-a1f2-80ac-9964-c5f8bb88b83a",
       "title": "got invited for dinner at aunty’s place",
       "tag": null,
@@ -800,7 +820,7 @@
       "images": [
         "images/330909a5a1f28070aa33da3cfd04f54d-cover.jpg"
       ],
-      "last_edited_time": "2026-08-24T03:25:00.000Z"
+      "last_edited_time": "2026-08-26T05:31:00.000Z"
     },
     {
       "id": "330909a5-a1f2-80a5-a8dd-e8abae325e75",
